@@ -21,6 +21,7 @@ from constants import (
     LOSS_WEIGHT_DECAY,
     DEFAULT_NUM_EPOCHS,
     DEFAULT_NUM_WORKERS,
+    DEFAULT_NUM_PROC,
     DEFAULT_MAX_LEN,
     DEFAULT_GRADIENT_CHECKPOINT,
     SYSTEM_PROMPT,
@@ -213,10 +214,10 @@ def main():
     tokenizer = AutoTokenizer.from_pretrained(args.basepath)
     
     print(f"Loading training dataset from {args.trainpath}")
-    train_dataset = build_dataset_rank(tokenizer, args.trainpath, train_config["max_len"], num_proc=8)
+    train_dataset = build_dataset_rank(tokenizer, args.trainpath, train_config["max_len"], num_proc=DEFAULT_NUM_PROC)
     
     print(f"Loading test dataset from {args.testpath}")
-    test_dataset = build_dataset_rank(tokenizer, args.testpath, train_config["max_len"], num_proc=8)
+    test_dataset = build_dataset_rank(tokenizer, args.testpath, train_config["max_len"], num_proc=DEFAULT_NUM_PROC)
     
     # Create data loaders
     train_loader, test_loader = create_data_loaders(

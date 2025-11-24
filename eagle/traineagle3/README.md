@@ -66,7 +66,7 @@ The training code has been split into the following modules:
 ### 3. Better Readability
 - Clear function names and docstrings
 - Logical organization by purpose
-- Reduced file length (main.py: 352 lines → 277 lines)
+- Reduced file length (main.py: 351 lines → 289 lines)
 
 ### 4. Improved Maintainability
 - Constants defined in one place

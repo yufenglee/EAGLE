@@ -22,6 +22,7 @@ CONV_ROLES = ["user", "assistant"]
 # Training configuration defaults
 DEFAULT_NUM_EPOCHS = 40
 DEFAULT_NUM_WORKERS = 2
+DEFAULT_NUM_PROC = 8  # Number of processes for data preprocessing
 DEFAULT_MAX_LEN = 2048
 DEFAULT_BATCH_SIZE = 1
 DEFAULT_GRADIENT_CHECKPOINT = True
