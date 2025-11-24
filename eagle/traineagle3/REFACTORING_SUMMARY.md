@@ -147,6 +147,15 @@ For users with custom modifications:
 
 The modular structure makes this easier than before!
 
+## Bug Fixes
+
+During refactoring, the following potential bug was identified and fixed:
+
+### Gradient Zeroing
+- **Before**: Used `model.zero_grad()` in training loop
+- **After**: Uses `model_engine.zero_grad()` 
+- **Impact**: Ensures gradients are properly cleared when using DeepSpeed, which is the recommended approach according to DeepSpeed documentation
+
 ## Future Enhancements
 
 The refactoring enables easy addition of:
