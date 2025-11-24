@@ -35,6 +35,9 @@ from safetensors import safe_open
 from datasets import load_dataset
 import multiprocessing
 
+# Import shared constants for consistency
+from constants import SYSTEM_PROMPT, ASSISTANT_SEPARATOR, USER_SEPARATOR, ROLE_MAPPING, CONV_ROLES
+
 # Copied from transformers.models.bart.modeling_bart._make_causal_mask
 def _make_causal_mask(
         input_ids_shape: torch.Size, dtype: torch.dtype, device: torch.device, past_key_values_length: int = 0
@@ -544,8 +547,6 @@ class Model(nn.Module):
         """
         N = self.draft_vocab_size
         if not os.path.exists("cache.pt"):
-            from constants import SYSTEM_PROMPT, ASSISTANT_SEPARATOR, USER_SEPARATOR, ROLE_MAPPING, CONV_ROLES
-            
             tokenizer = AutoTokenizer.from_pretrained(tokenizerpath)
             dataset = load_dataset('json', data_files=datapath)
             dataset = dataset['train']

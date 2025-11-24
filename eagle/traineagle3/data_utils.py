@@ -5,7 +5,7 @@ import torch
 from transformers import PreTrainedTokenizerBase
 from datasets import load_dataset
 
-from .constants import SYSTEM_PROMPT, ASSISTANT_SEPARATOR, USER_SEPARATOR, ROLE_MAPPING, CONV_ROLES
+from constants import SYSTEM_PROMPT, ASSISTANT_SEPARATOR, USER_SEPARATOR, ROLE_MAPPING, CONV_ROLES
 
 
 def build_messages(conversations: List[Dict[str, str]]) -> List[Dict[str, str]]:

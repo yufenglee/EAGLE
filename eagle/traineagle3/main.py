@@ -17,7 +17,18 @@ from transformers import AutoTokenizer
 
 from cnets import Model
 from configs import EConfig
-from constants import LOSS_WEIGHT_DECAY
+from constants import (
+    LOSS_WEIGHT_DECAY,
+    DEFAULT_NUM_EPOCHS,
+    DEFAULT_NUM_WORKERS,
+    DEFAULT_MAX_LEN,
+    DEFAULT_GRADIENT_CHECKPOINT,
+    SYSTEM_PROMPT,
+    ASSISTANT_SEPARATOR,
+    USER_SEPARATOR,
+    ROLE_MAPPING,
+    CONV_ROLES
+)
 from data_utils import build_dataset_rank
 from data_collator import DataCollatorWithPadding
 from checkpoint_utils import find_latest_checkpoint
@@ -59,11 +70,11 @@ def load_training_config(deepspeed_config_path: str) -> dict:
     
     return {
         "bs": ds_config["train_micro_batch_size_per_gpu"],
-        "num_epochs": 40,
-        "num_workers": 2,
-        "max_len": 2048,
+        "num_epochs": DEFAULT_NUM_EPOCHS,
+        "num_workers": DEFAULT_NUM_WORKERS,
+        "max_len": DEFAULT_MAX_LEN,
         "config_path": "config.json",
-        "gradient_checkpoint": True
+        "gradient_checkpoint": DEFAULT_GRADIENT_CHECKPOINT
     }
 
 
@@ -202,10 +213,10 @@ def main():
     tokenizer = AutoTokenizer.from_pretrained(args.basepath)
     
     print(f"Loading training dataset from {args.trainpath}")
-    train_dataset = build_dataset_rank(tokenizer, args.trainpath, train_config["max_len"])
+    train_dataset = build_dataset_rank(tokenizer, args.trainpath, train_config["max_len"], num_proc=8)
     
     print(f"Loading test dataset from {args.testpath}")
-    test_dataset = build_dataset_rank(tokenizer, args.testpath, train_config["max_len"])
+    test_dataset = build_dataset_rank(tokenizer, args.testpath, train_config["max_len"], num_proc=8)
     
     # Create data loaders
     train_loader, test_loader = create_data_loaders(

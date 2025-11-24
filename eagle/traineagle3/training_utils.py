@@ -5,7 +5,7 @@ import torch
 import deepspeed
 from tqdm import tqdm
 
-from .constants import LOSS_WEIGHT_DECAY
+from constants import LOSS_WEIGHT_DECAY
 
 
 def compute_weighted_loss(losses: List[torch.Tensor], weight_decay: float = LOSS_WEIGHT_DECAY) -> torch.Tensor:

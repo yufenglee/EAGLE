@@ -19,5 +19,12 @@ USER_SEPARATOR = "<|eot_id|><|start_header_id|>user<|end_header_id|>"
 ROLE_MAPPING = {"human": "user", "gpt": "assistant"}
 CONV_ROLES = ["user", "assistant"]
 
+# Training configuration defaults
+DEFAULT_NUM_EPOCHS = 40
+DEFAULT_NUM_WORKERS = 2
+DEFAULT_MAX_LEN = 2048
+DEFAULT_BATCH_SIZE = 1
+DEFAULT_GRADIENT_CHECKPOINT = True
+
 # Loss weight decay factor for multiple prediction heads
 LOSS_WEIGHT_DECAY = 0.8
